@@ -2,8 +2,14 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { favoriteImg, logo, searchIcon } from '../../assets/img/Header'
 import SearchPopover from './SearchPopover'
+import coinApi from '../../api/coinApi'
 
 function Header() {
+    // coinApi.getGlobalMarket(1)
+    // coinApi.getTrendingCoins()
+    // coinApi.getCoinHistory('1m', 'bitcoin')
+    // coinApi.getTrendingCoins()
+    // coinApi.searchCoin('bitcoin')
     return (
         <div className="">
             <div className="w-[1300px] py-2 px-4 h-[73px] mx-auto flex items-center justify-between">

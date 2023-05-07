@@ -7,6 +7,7 @@ import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Search from './pages/Search'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function Layout({ children }) {
     return (
@@ -19,8 +20,10 @@ function Layout({ children }) {
 }
 
 function App() {
+    const queryClient = new QueryClient()
+
     return (
-        <div className="App">
+        <QueryClientProvider client={queryClient}>
             <Routes>
                 <Route
                     path="/"
@@ -54,16 +57,10 @@ function App() {
                         </Layout>
                     }
                 />
-                <Route
-                    path="/login"
-                    element={<Login />}
-                />
-                <Route
-                    path="/register"
-                    element={<Register />}
-                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
-        </div>
+        </QueryClientProvider>
     )
 }
 
