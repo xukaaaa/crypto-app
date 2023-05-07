@@ -1,15 +1,12 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { favoriteImg, logo, searchIcon } from '../../assets/img/Header'
-import SearchPopover from './SearchPopover'
+import SearchPopover from './Search/SearchPopover'
 import coinApi from '../../api/coinApi'
+import UserPopover from './User/UserPopover'
 
 function Header() {
-    // coinApi.getGlobalMarket(1)
-    // coinApi.getTrendingCoins()
-    // coinApi.getCoinHistory('1m', 'bitcoin')
-    // coinApi.getTrendingCoins()
-    // coinApi.searchCoin('bitcoin')
+    const isLogin = false
     return (
         <div className="">
             <div className="w-[1300px] py-2 px-4 h-[73px] mx-auto flex items-center justify-between">
@@ -25,10 +22,17 @@ function Header() {
                         <img src={favoriteImg} alt="favorite" />
                         Favorite
                     </Link>
-                    <button className="mx-[6px] px-4 border rounded h-8 border-primary text-primary border-solid">
-                        Login
-                    </button>
-                    <button className="h-8 px-4 rounded bg-primary text-white ">Sign up</button>
+
+                    {isLogin ? (
+                        <UserPopover />
+                    ) : (
+                        <>
+                            <button className="mx-[6px] px-4 border rounded h-8 border-primary text-primary border-solid">
+                                Login
+                            </button>
+                            <button className="h-8 px-4 rounded bg-primary text-white ">Sign up</button>
+                        </>
+                    )}
 
                     <SearchPopover />
                 </div>

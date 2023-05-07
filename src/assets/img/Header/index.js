@@ -1,4 +1,5 @@
 import logo from './logo.webp'
-import favoriteImg from './favorite.svg'
-import searchIcon from './search.svg'
-export { logo, favoriteImg, searchIcon }
+import favoriteImg from './favoriteIcon.svg'
+import searchIcon from './searchIcon.svg'
+import trendingIcon from './trendingIcon.svg'
+export { logo, favoriteImg, searchIcon, trendingIcon }
