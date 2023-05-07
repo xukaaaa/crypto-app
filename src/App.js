@@ -1,14 +1,14 @@
-import logo from './logo.svg'
-import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import Homepage from './pages/Homepage'
+import Header from './components/Header/Header'
 import CoinDetails from './pages/CoinDetails'
 import Favorite from './pages/Favorite'
+import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Search from './pages/Search'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function Layout({ children }) {
     return (
@@ -21,8 +21,10 @@ function Layout({ children }) {
 }
 
 function App() {
+    const queryClient = new QueryClient()
+
     return (
-        <div className="App">
+        <QueryClientProvider client={queryClient}>
             <Routes>
                 <Route
                     path="/"
@@ -56,16 +58,11 @@ function App() {
                         </Layout>
                     }
                 />
-                <Route
-                    path="/login"
-                    element={<Login />}
-                />
-                <Route
-                    path="/register"
-                    element={<Register />}
-                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
-        </div>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
     )
 }
 
