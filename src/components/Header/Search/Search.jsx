@@ -6,7 +6,7 @@ function Search(props, ref) {
         <div
             onClick={props.onClick}
             ref={ref}
-            className="ml-2 w-[260px] rounded-lg bg-[#eff2f5] text-[#a6b0c3] p-2 h-[39px] flex items-center justify-start cursor-pointer"
+            className="ml-2 flex h-[39px] w-[260px] cursor-pointer items-center justify-start rounded-lg bg-[#eff2f5] p-2 text-[#a6b0c3]"
         >
             <img src={searchIcon} alt="search-icon" />
             <span className="ml-2">Search</span>
