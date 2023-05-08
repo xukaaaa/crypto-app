@@ -14,6 +14,7 @@ export default {
          },
          boxShadow: {
             headerSearch: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+            footer: 'rgba(0, 0, 0, 0.2) 0px -2px 8px 0px',
          },
       },
    },
