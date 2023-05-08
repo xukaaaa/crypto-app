@@ -1,15 +1,14 @@
-import React, { memo } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { favoriteImg, logo, searchIcon } from '../../assets/img/Header'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { favoriteImg, logo } from '../../assets/img/Header'
 import SearchPopover from './Search/SearchPopover'
-import coinApi from '../../api/coinApi'
 import UserPopover from './User/UserPopover'
 
 function Header() {
     const isLogin = false
     return (
-        <div className="">
-            <div className="w-[1300px] py-2 px-4 h-[73px] mx-auto flex items-center justify-between">
+        <div className="shadow-md">
+            <div className="mx-auto flex h-[73px] w-[1300px] items-center justify-between px-4 py-2">
                 <Link to="/" className="">
                     <img src={logo} alt="logo" className="h-[39px]" />
                 </Link>
@@ -17,7 +16,7 @@ function Header() {
                 <div className="flex h-9 items-center text-xs">
                     <Link
                         to={'/favorite'}
-                        className="flex w-24 px-3 items-center justify-between rounded hover:bg-[#f8fafd] h-full font-light "
+                        className="flex h-full w-24 items-center justify-between rounded px-3 font-light hover:bg-[#f8fafd] "
                     >
                         <img src={favoriteImg} alt="favorite" />
                         Favorite
@@ -27,10 +26,10 @@ function Header() {
                         <UserPopover />
                     ) : (
                         <>
-                            <button className="mx-[6px] px-4 border rounded h-8 border-primary text-primary border-solid">
+                            <button className="mx-[6px] h-8 rounded border border-solid border-primary px-4 text-primary">
                                 Login
                             </button>
-                            <button className="h-8 px-4 rounded bg-primary text-white ">Sign up</button>
+                            <button className="h-8 rounded bg-primary px-4 text-white ">Sign up</button>
                         </>
                     )}
 
