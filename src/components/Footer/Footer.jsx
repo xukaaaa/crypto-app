@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
    return (
-      <div className="w-full py-6 shadow-footer">
+      <div className="w-full py-6 shadow-footer fixed bottom-0">
          <div className="w-[1300px] mx-auto flex items-center justify-between px-4 ">
             <p>© 2023 CoinGecko. All Rights Reserved.</p>
             <div>
