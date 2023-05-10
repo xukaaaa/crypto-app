@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import CoinDetails from './pages/CoinDetails'
@@ -9,6 +9,12 @@ import Register from './pages/Register'
 import Search from './pages/Search'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, logout } from './redux/authSlice'
+import { useEffect } from 'react'
+import { auth } from './firebase'
+import TestPage from './pages/TestPage'
+import Cookies from 'js-cookie'
 
 function Layout({ children }) {
    return (
@@ -22,6 +28,25 @@ function Layout({ children }) {
 
 function App() {
    const queryClient = new QueryClient()
+   const dispatch = useDispatch()
+   const currentUser = useSelector((state) =>
+      JSON.parse(state.auth.currentUser)
+   )
+
+   useEffect(() => {
+      const unsubcribe = auth.onAuthStateChanged((user) => {
+         if (!user) {
+            dispatch(logout())
+            Cookies.remove('user')
+         }
+      })
+
+      return unsubcribe
+   }, [])
+
+   function AuthRequired({ children }) {
+      return currentUser ? children : <Navigate to="/login" />
+   }
 
    return (
       <QueryClientProvider client={queryClient}>
@@ -30,7 +55,8 @@ function App() {
                path="/"
                element={
                   <Layout>
-                     <Homepage />
+                     <TestPage />
+                     {/* <Homepage /> */}
                   </Layout>
                }
             />
@@ -45,9 +71,11 @@ function App() {
             <Route
                path="/favorite"
                element={
-                  <Layout>
-                     <Favorite />
-                  </Layout>
+                  <AuthRequired>
+                     <Layout>
+                        <Favorite />
+                     </Layout>
+                  </AuthRequired>
                }
             />
             <Route
