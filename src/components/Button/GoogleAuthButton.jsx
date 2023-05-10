@@ -17,9 +17,10 @@ function GoogleAuthButton() {
          const { displayName, email, photoURL, uid } = user
          Cookies.set(
             'user',
-            JSON.stringify({ displayName, email, photoURL, uid })
+            JSON.stringify({ displayName, email, photoURL, uid }),
+            { secure: true }
          )
-         dispatch(login(JSON.stringify({ displayName, email, photoURL, uid })))
+         dispatch(login({ displayName, email, photoURL, uid }))
          setTimeout(() => {
             navigate(-1)
          }, 1000)

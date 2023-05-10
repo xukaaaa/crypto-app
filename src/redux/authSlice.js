@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 
 const initialState = {
-   currentUser: Cookies.get('user') || null,
+   currentUser: JSON.parse(Cookies.get('user') || null),
 }
 
 const authSlice = createSlice({

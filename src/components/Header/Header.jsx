@@ -6,9 +6,7 @@ import UserPopover from './User/UserPopover'
 import { useSelector } from 'react-redux'
 
 function Header() {
-   const currentUser = useSelector((state) =>
-      JSON.parse(state.auth.currentUser)
-   )
+   const currentUser = useSelector((state) => state.auth.currentUser)
 
    return (
       <div className="shadow-md">
@@ -20,9 +18,9 @@ function Header() {
             <div className="flex h-9 items-center text-xs">
                <Link
                   to={'/favorite'}
-                  className="flex h-full w-24 items-center justify-between rounded px-3 font-light hover:bg-[#f8fafd] "
+                  className="flex h-full w-24 items-center justify-between rounded px-3 font-light hover:bg-[#f8fafd]"
                >
-                  <img src={favoriteImg} alt="favorite" />
+                  <img src={favoriteImg} alt="favorite" className="w-5 h-5" />
                   Favorite
                </Link>
 
