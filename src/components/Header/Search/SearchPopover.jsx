@@ -8,11 +8,15 @@ import { searchIcon, trendingIcon } from '../../../assets/img/Header'
 import Search from './Search'
 import SearchItem from './SearchItem'
 import SearchLoading from './SearchLoading'
+import { motion, useSpring } from 'framer-motion'
 
 function SearchPopover() {
    const [coin, setCoin] = useState('')
    const [isPopoverShow, setIsPopoverShow] = useState(false)
    const inputRef = useRef()
+   const springConfig = { damping: 15, stiffness: 300 }
+   const opacity = useSpring(0)
+   const scale = useSpring(0)
 
    const [
       { data: trendingList, isLoading: trendingLoading, error: trendingError },
@@ -40,8 +44,9 @@ function SearchPopover() {
    })
 
    const render = (attrs) => (
-      <div
-         className="w-[400px] rounded-lg bg-white shadow-headerSearch"
+      <motion.div
+         style={{ opacity, transformOrigin: 'top right' }}
+         className="w-[400px] rounded-lg bg-white shadow-headerSearch ease-linear"
          tabIndex="-1"
          {...attrs}
       >
@@ -119,7 +124,7 @@ function SearchPopover() {
                </div>
             )}
          </div>
-      </div>
+      </motion.div>
    )
 
    useEffect(() => {
@@ -130,6 +135,15 @@ function SearchPopover() {
 
    return (
       <Tippy
+         animation={true}
+         onMount={() => {
+            opacity.set(1)
+            scale.set(1)
+         }}
+         onHide={() => {
+            opacity.set(0)
+            scale.set(0)
+         }}
          visible={isPopoverShow}
          interactive={true}
          placement="bottom-end"

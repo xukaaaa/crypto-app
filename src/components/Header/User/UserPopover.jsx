@@ -1,21 +1,29 @@
 import Tippy from '@tippyjs/react/headless'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { auth } from '../../../firebase'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../../redux/authSlice'
+import { motion, useSpring } from 'framer-motion'
 import Cookies from 'js-cookie'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../../firebase'
+import { logout } from '../../../redux/authSlice'
 
 function UserPopover({ currentUser }) {
    const dispatch = useDispatch()
+   const navigate = useNavigate()
+   const springConfig = { damping: 20, stiffness: 150 }
+   const opacity = useSpring(0, springConfig)
    const handleLogout = async () => {
       await auth.signOut()
       Cookies.remove('user')
       dispatch(logout())
+      navigate('/')
    }
 
    const render = (attrs) => (
-      <div className="w-[272px] rounded-lg bg-white p-3 pb-2 shadow-headerSearch">
+      <motion.div
+         style={{ opacity }}
+         className="w-[272px] rounded-lg bg-white p-3 pb-2 shadow-headerSearch"
+      >
          <div className="flex h-[76px] items-center">
             <div className="flex items-center justify-center">
                <img
@@ -44,7 +52,7 @@ function UserPopover({ currentUser }) {
                Logout
             </button>
          </div>
-      </div>
+      </motion.div>
    )
 
    return (
@@ -53,13 +61,15 @@ function UserPopover({ currentUser }) {
          <Tippy
             interactive
             placement="bottom-end"
-            delay={[0, 700]}
+            onMount={() => opacity.set(1)}
+            onHide={() => opacity.set(0)}
+            delay={[0, 1000]}
             render={render}
          >
             <img
                src={currentUser.photoURL}
                alt="avatar"
-               className="h-7 w-7 cursor-pointer rounded-full"
+               className="h-7 w-7 cursor-pointer rounded-full ml-2"
             />
          </Tippy>
       </div>
