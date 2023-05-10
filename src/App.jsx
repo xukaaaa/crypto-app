@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 import { auth } from './firebase'
 import TestPage from './pages/TestPage'
 import Cookies from 'js-cookie'
+import NotFound from './pages/NotFound'
 
 function Layout({ children }) {
    return (
@@ -29,13 +30,19 @@ function Layout({ children }) {
 function App() {
    const queryClient = new QueryClient()
    const dispatch = useDispatch()
-   const currentUser = useSelector((state) =>
-      JSON.parse(state.auth.currentUser)
-   )
+   const currentUser = useSelector((state) => state.auth.currentUser)
 
    useEffect(() => {
       const unsubcribe = auth.onAuthStateChanged((user) => {
-         if (!user) {
+         if (user) {
+            const { displayName, email, photoURL, uid } = user
+            dispatch(login({ displayName, email, photoURL, uid }))
+            Cookies.set(
+               'user',
+               JSON.stringify({ displayName, email, photoURL, uid }),
+               { secure: true }
+            )
+         } else {
             dispatch(logout())
             Cookies.remove('user')
          }
@@ -50,45 +57,24 @@ function App() {
 
    return (
       <QueryClientProvider client={queryClient}>
-         <Routes>
-            <Route
-               path="/"
-               element={
-                  <Layout>
-                     <TestPage />
-                     {/* <Homepage /> */}
-                  </Layout>
-               }
-            />
-            <Route
-               path="/coin/*"
-               element={
-                  <Layout>
-                     <CoinDetails />
-                  </Layout>
-               }
-            />
-            <Route
-               path="/favorite"
-               element={
-                  <AuthRequired>
-                     <Layout>
+         <Layout>
+            <Routes>
+               <Route path="/" element={<Homepage />} />
+               <Route path="/coin/*" element={<CoinDetails />} />
+               <Route
+                  path="/favorite"
+                  element={
+                     <AuthRequired>
                         <Favorite />
-                     </Layout>
-                  </AuthRequired>
-               }
-            />
-            <Route
-               path="/search/:queryParam"
-               element={
-                  <Layout>
-                     <Search />
-                  </Layout>
-               }
-            />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-         </Routes>
+                     </AuthRequired>
+                  }
+               />
+               <Route path="/search/:queryParam" element={<Search />} />
+               <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register />} />
+               <Route path="/*" element={<NotFound />} />
+            </Routes>
+         </Layout>
          <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
    )
