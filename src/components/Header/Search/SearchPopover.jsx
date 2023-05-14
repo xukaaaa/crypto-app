@@ -1,5 +1,6 @@
 import { useQueries } from '@tanstack/react-query'
 import Tippy from '@tippyjs/react/headless'
+import { motion, useSpring } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import 'tippy.js/dist/tippy.css'
@@ -8,7 +9,6 @@ import { searchIcon, trendingIcon } from '../../../assets/img/Header'
 import Search from './Search'
 import SearchItem from './SearchItem'
 import SearchLoading from './SearchLoading'
-import { motion, useSpring } from 'framer-motion'
 
 function SearchPopover() {
    const [coin, setCoin] = useState('')
@@ -46,7 +46,7 @@ function SearchPopover() {
    const render = (attrs) => (
       <motion.div
          style={{ opacity, transformOrigin: 'top right' }}
-         className="w-[400px] rounded-lg bg-white shadow-headerSearch ease-linear"
+         className="w-[400px] rounded-lg bg-primary shadow-headerSearch ease-linear"
          tabIndex="-1"
          {...attrs}
       >
@@ -117,7 +117,7 @@ function SearchPopover() {
                <div className="px-2" onClick={() => setIsPopoverShow(false)}>
                   <Link
                      to={`/search/${coin}`}
-                     className="flex h-10 items-center rounded-lg pl-2 text-sm text-[#808a9d] hover:bg-[#f8fafd]"
+                     className="flex h-10 items-center rounded-lg pl-2 text-sm text-[#808a9d] hover:bg-hoverPrimary"
                   >
                      See all results for '{coin}'
                   </Link>

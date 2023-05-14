@@ -1,4 +1,4 @@
-import logo from './logo.webp'
+import logo from './logo.svg'
 import favoriteImg from './favoriteIcon.svg'
 import searchIcon from './searchIcon.svg'
 import trendingIcon from './trendingIcon.svg'
