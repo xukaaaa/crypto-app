@@ -13,7 +13,7 @@ function SearchItem({
       <Link
          onClick={onClick}
          to={`/coin/${coinId}`}
-         className="flex h-10 w-full items-center justify-between rounded-lg p-[10px] hover:bg-[#f8fafd]"
+         className="flex h-10 w-full items-center justify-between rounded-lg p-[10px] hover:bg-hoverPrimary"
          title={coinName}
       >
          <div className="flex items-center">

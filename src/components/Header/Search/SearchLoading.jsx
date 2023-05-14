@@ -8,16 +8,16 @@ function SearchLoading() {
          </p>
          {Array(3)
             .fill('')
-            .map((item, index) => (
+            .map((_, index) => (
                <div
                   key={index}
                   className="flex h-10 w-full animate-pulse items-center justify-between rounded-lg p-[10px]"
                >
                   <div className="flex items-center">
-                     <div className="mr-2 h-5 w-5 rounded-full bg-slate-200" />
-                     <span className="mr-[6px] h-4 w-52 rounded-xl bg-slate-200"></span>
+                     <div className="mr-2 h-5 w-5 rounded-full bg-slate-100" />
+                     <span className="mr-[6px] h-4 w-52 rounded-xl bg-slate-100"></span>
                   </div>
-                  <span className="h-4 w-8 rounded-xl bg-slate-200"></span>
+                  <span className="h-4 w-8 rounded-xl bg-slate-100"></span>
                </div>
             ))}
       </>

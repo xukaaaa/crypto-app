@@ -3,13 +3,17 @@ export default {
    content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
    theme: {
       extend: {
+         backgroundColor: {
+            primary: '#161234',
+            hoverPrimary: '#7c7c7c30',
+         },
+         textColor: {
+            primary: 'white',
+         },
          colors: {
             primary: '#8dc647',
          },
          borderColor: {
-            primary: '#8dc647',
-         },
-         backgroundColor: {
             primary: '#8dc647',
          },
          boxShadow: {
