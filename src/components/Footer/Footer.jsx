@@ -1,30 +1,52 @@
 import React from 'react'
+import { logo } from '../../assets/img/Header'
 
 function Footer() {
    return (
-      <div className="w-full py-6 shadow-footer fixed bottom-0">
-         <div className="w-[1300px] mx-auto flex items-center justify-between px-4 ">
-            <p>© 2023 CoinGecko. All Rights Reserved.</p>
-            <div>
-               <button>
-                  <img
-                     loading="lazy"
-                     alt="Google Play Store Button"
-                     width="135"
-                     height="40"
-                     className="mr-2"
-                     src="https://static.coingecko.com/s/coingecko_logos/google_play_store-cb1f298b04afa7f74639a948d9b2e22e4aa6eea9486a2b0442c2cf9bdcda63e8.svg"
-                  />
-               </button>
-               <button>
-                  <img
-                     loading="lazy"
-                     alt="Apple App Store Button"
-                     width="135"
-                     height="40"
-                     src="https://static.coingecko.com/s/coingecko_logos/apple_app_store-558245a688cc13737dfb861fd82b252d75d5afbaf343c06e3067a454675bbe05.svg"
-                  />
-               </button>
+      <div className=" shadow-footer bg-footer">
+         <div className="w-pc mx-auto p-[35px]  h-[396px]">
+            <div className="flex items-center uppercase text-[40px]">
+               <img
+                  src={logo}
+                  alt="logo"
+                  className="mr-8 w-[70px] h-[70px] i"
+               />
+               Crypto
+            </div>
+
+            <div className="flex gap-[156px] mt-[45px]">
+               <div className="w-1/3">
+                  <p className="pb-4 border-b border-opacity-50 border-[#ffffff] uppercase">
+                     More about us
+                  </p>
+                  <p className="mt-4 text-xl">
+                     Lorem Ipsum is simply dummy text of the printing and
+                     typesetting industry. Lorem Ipsum has been the industry's
+                     standard dummy text ever since the 1500s...
+                  </p>
+               </div>
+
+               <div className="w-1/3">
+                  <p className="pb-4 border-b border-opacity-50 border-[#ffffff] uppercase">
+                     keep connected
+                  </p>
+                  <div className="flex flex-col gap-y-4 mt-4 uppercase text-xl">
+                     <p>facebook</p>
+                     <p>linked</p>
+                     <p>telegram</p>
+                     <p>gmail</p>
+                  </div>
+               </div>
+
+               <div className="w-1/3">
+                  <p className="pb-4 border-b border-opacity-50 border-[#ffffff] uppercase">
+                     contact information
+                  </p>
+                  <div className="mt-4">
+                     <p>Trieu Khuc St, Hanoi city...</p>
+                     <p className="mt-3">0999.999.999</p>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
