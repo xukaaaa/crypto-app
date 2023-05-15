@@ -14,7 +14,7 @@ function UserPopover({ currentUser }) {
       await auth.signOut()
       Cookies.remove('user')
       dispatch(logout())
-      toast.info('Đã đăng xuất')
+      toast.info('Logout!')
       navigate('/')
    }
 

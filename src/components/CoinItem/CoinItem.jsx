@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { favoriteImg } from '../../assets/img/Header'
+import { toast } from 'react-toastify'
 
 function CoinItem({
    id,
@@ -28,22 +29,25 @@ function CoinItem({
    }
 
    return (
-      <div className="px-6 bg-primary hover:bg-hoverPrimary" title={name}>
+      <div
+         className="px-6 bg-primary hover:bg-hoverPrimary rounded-lg"
+         title={name}
+      >
          <Link
             to={`/coin/${id}`}
-            className="w-full flex items-center mx-auto h-[84px] border-b border-solid border-[#ffffff4d]"
+            className="w-full flex items-center mx-auto h-[84px] border-b border-solid border-[#ffffff4d] "
          >
-            <div className="w-1/12 text-[22px] flex items-center">
+            <div className="w-1/12 text-[22px] flex items-center pr-4">
                <img
                   src={favoriteImg}
                   alt=""
-                  className="mr-12"
                   onClick={(e) => {
                      e.preventDefault()
                      console.log('click favorite')
+                     toast.success('Add to favorite success')
                   }}
                />
-               <span>{rank}</span>
+               <span className="flex-1 flex justify-center">{rank}</span>
             </div>
 
             <div className="w-3/12 flex items-center">

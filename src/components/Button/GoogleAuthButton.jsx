@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../redux/authSlice'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 function GoogleAuthButton() {
    const dispatch = useDispatch()
@@ -21,10 +22,12 @@ function GoogleAuthButton() {
             { secure: true }
          )
          dispatch(login({ displayName, email, photoURL, uid }))
+         toast.success('Login successfully!')
          setTimeout(() => {
             navigate(-1)
          }, 1000)
       } catch (error) {
+         toast.error('Login failed!')
          throw error
       }
    }
