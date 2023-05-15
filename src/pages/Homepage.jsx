@@ -43,7 +43,7 @@ function Homepage() {
 
    return (
       <div className="bg-primary text-primary">
-         <div className="h-[180px] pt-14 pl-12 flex pr-10 justify-between items-center">
+         <div className="h-[180px] pt-14 flex px-6 justify-between items-center">
             <div>
                <p className="text-[32px] mb-3">
                   Cryptocurrency Prices by Market Cap
@@ -107,7 +107,8 @@ function Homepage() {
                })
             }}
             className="flex justify-end mr-6 my-10"
-            pageClassName="w-10 h-10 flex items-center justify-center hover:bg-hoverPrimary rounded-full mx-1"
+            pageClassName="mx-1"
+            pageLinkClassName="w-10 h-10 flex items-center justify-center rounded-full hover:bg-hoverPrimary "
             activeClassName="w-10 h-10 flex items-center justify-center bg-hoverPrimary rounded-full"
             breakClassName="w-10 h-10 flex items-center justify-center"
             breakLabel="..."

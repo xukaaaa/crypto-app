@@ -13,15 +13,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login, logout } from './redux/authSlice'
 import { useEffect } from 'react'
 import { auth } from './firebase'
-import TestPage from './pages/TestPage'
 import Cookies from 'js-cookie'
 import NotFound from './pages/NotFound'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function Layout({ children }) {
    return (
       <>
          <Header />
-         {children}
+         <div className="w-pc mx-auto">{children}</div>
          <Footer />
       </>
    )
@@ -74,8 +75,19 @@ function App() {
                <Route path="/register" element={<Register />} />
                <Route path="/*" element={<NotFound />} />
             </Routes>
+            <ToastContainer
+               position="top-right"
+               autoClose={3000}
+               hideProgressBar={false}
+               newestOnTop={false}
+               closeOnClick
+               rtl={false}
+               pauseOnFocusLoss
+               draggable={false}
+               pauseOnHover={false}
+               theme="dark"
+            />
          </Layout>
-         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
    )
 }
