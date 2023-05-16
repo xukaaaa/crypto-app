@@ -43,7 +43,7 @@ function Homepage() {
 
    return (
       <div className="bg-primary text-primary">
-         <div className="h-[180px] pt-14 flex px-6 justify-between items-center">
+         <div className="h-[180px] flex px-6 justify-between items-center">
             <div>
                <p className="text-[32px] mb-3">
                   Cryptocurrency Prices by Market Cap
