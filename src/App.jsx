@@ -57,15 +57,15 @@ function App() {
 
    useEffect(() => {
       const db = getDatabase()
-      const usersRef = ref(db, 'users/' + currentUser.uid + '/favoriteList')
-      console.log(`users/${currentUser.uid}/favoriteList`)
+      const usersRef = ref(db, 'users/' + currentUser?.uid + '/favoriteList')
+      console.log(`users/${currentUser?.uid}/favoriteList`)
       let favoriteList = []
       onValue(usersRef, (snapshot) => {
          const data = snapshot.val()
          dispatch(getFavorite(data))
       })
       console.log(favoriteList)
-   }, [])
+   }, [currentUser])
 
    function AuthRequired({ children }) {
       return currentUser ? children : <Navigate to="/login" />
