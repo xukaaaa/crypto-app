@@ -1,8 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { favoriteImg } from '../../assets/img/Header'
 import { toast } from 'react-toastify'
-import { shallowEqual, useSelector } from 'react-redux'
+import {
+   defaultCoinIcon,
+   favoriteIcon,
+   favoriteIconActive,
+} from '../../assets/img/CoinItem'
+import { addFavorite, removeFavorite } from '../../redux/favoriteSlice'
 
 function CoinItem({
    id,
@@ -18,12 +23,12 @@ function CoinItem({
    marketcap,
 }) {
    const isFavorited = useSelector((state) =>
-      state.favorite.favoriteList.some((item) => item === id)
+      state.favorite.favoriteList?.some((item) => item === id)
    )
+   const dispatch = useDispatch()
+   const favoritList = useSelector((state) => state.favorite.favoriteList)
 
-   console.log(isFavorited)
-   const [tempIcon, setTempIcon] = useState(icon)
-   const imgRef = useRef()
+   const coinIconRef = useRef()
    const formatPrice = (price) => {
       return price?.toLocaleString('en-US', {
          maximumFractionDigits: price < 1 ? 6 : 2,
@@ -32,6 +37,19 @@ function CoinItem({
 
    const formatCurrency = (currency) => {
       return Math.floor(currency).toLocaleString()
+   }
+
+   const handleLike = (e) => {
+      e.preventDefault()
+      console.log(favoritList)
+      dispatch(addFavorite(id))
+      toast.success('Add to favorite success')
+   }
+
+   const handleDislike = (e) => {
+      e.preventDefault()
+      dispatch(removeFavorite(id))
+      toast.success('Remove from favorite success')
    }
 
    return (
@@ -43,8 +61,22 @@ function CoinItem({
             to={`/coin/${id}`}
             className="w-full flex items-center mx-auto h-[84px] border-b border-solid border-[#ffffff4d] "
          >
-            <div className="w-1/12 text-[22px] flex items-center pr-4">
-               {isFavorited ? <p>like</p> : <p>dislike</p>}
+            <div className="w-1/12 text-[22px] flex items-center pr-4 h-full">
+               {isFavorited ? (
+                  <button
+                     className="h-full flex items-center"
+                     onClick={handleDislike}
+                  >
+                     <img className="w-6 h-6" src={favoriteIconActive} alt="" />
+                  </button>
+               ) : (
+                  <button
+                     className="h-full flex items-center"
+                     onClick={handleLike}
+                  >
+                     <img className="h-6 w-6" src={favoriteIcon} alt="" />
+                  </button>
+               )}
                {/* <img
                   src={favoriteImg}
                   alt=""
@@ -60,13 +92,11 @@ function CoinItem({
             <div className="w-3/12 flex items-center">
                <div className="w-6 h-6 mr-4 flex-shrink-0">
                   <img
-                     onError={(e) =>
-                        setTempIcon(
-                           'https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80'
-                        )
+                     onError={() =>
+                        coinIconRef.current.setAttribute('src', defaultCoinIcon)
                      }
-                     ref={imgRef}
-                     src={tempIcon}
+                     ref={coinIconRef}
+                     src={icon}
                      alt="coin-icon"
                      className="w-full h-full rounded-full"
                   />

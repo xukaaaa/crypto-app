@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { defaultCoinIcon } from '../../../assets/img/CoinItem'
 
 function SearchItem({
    coinImg,
@@ -9,6 +10,7 @@ function SearchItem({
    onClick,
    coinId,
 }) {
+   const coinIconRef = useRef()
    return (
       <Link
          onClick={onClick}
@@ -17,7 +19,15 @@ function SearchItem({
          title={coinName}
       >
          <div className="flex items-center">
-            <img src={coinImg} alt="coin-img" className="mr-2 h-5 w-5" />
+            <img
+               src={coinImg}
+               alt="coin-img"
+               onError={() =>
+                  coinIconRef.current.setAttribute('src', defaultCoinIcon)
+               }
+               ref={coinIconRef}
+               className="mr-2 h-5 w-5"
+            />
             <p className="mr-[6px] text-sm font-semibold truncate flex items-center max-w-[250px] ">
                {coinName}
             </p>
