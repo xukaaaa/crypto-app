@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { favoriteImg } from '../../assets/img/Header'
 import { toast } from 'react-toastify'
+import { shallowEqual, useSelector } from 'react-redux'
 
 function CoinItem({
    id,
@@ -16,6 +17,11 @@ function CoinItem({
    volume,
    marketcap,
 }) {
+   const isFavorited = useSelector((state) =>
+      state.favorite.favoriteList.some((item) => item === id)
+   )
+
+   console.log(isFavorited)
    const [tempIcon, setTempIcon] = useState(icon)
    const imgRef = useRef()
    const formatPrice = (price) => {
@@ -38,7 +44,8 @@ function CoinItem({
             className="w-full flex items-center mx-auto h-[84px] border-b border-solid border-[#ffffff4d] "
          >
             <div className="w-1/12 text-[22px] flex items-center pr-4">
-               <img
+               {isFavorited ? <p>like</p> : <p>dislike</p>}
+               {/* <img
                   src={favoriteImg}
                   alt=""
                   onClick={(e) => {
@@ -46,7 +53,7 @@ function CoinItem({
                      console.log('click favorite')
                      toast.success('Add to favorite success')
                   }}
-               />
+               /> */}
                <span className="flex-1 flex justify-center">{rank}</span>
             </div>
 
