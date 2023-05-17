@@ -26,7 +26,7 @@ ChartJS.register(
 )
 
 function CoinDetail() {
-   const coinId = useParams()['*']
+   const coinId = useParams().coinId
    const iconRef = useRef()
 
    const [period, setPeriod] = useState('24h')
@@ -36,11 +36,17 @@ function CoinDetail() {
       isLoading: coinDetailLoading,
       isError,
       isFetching: coinDetailFetching,
-   } = useQuery(['coinDetail', coinId], () => coinApi.getCoinDetail(coinId))
+      isFetched,
+   } = useQuery(['coinDetail', coinId], () => coinApi.getCoinDetail(coinId), {
+      refetchOnWindowFocus: false,
+   })
 
    const { data: coinHistoryData } = useQuery(
       ['coinHistory', coinId, period],
-      () => coinApi.getCoinHistory(period, coinId)
+      () => coinApi.getCoinHistory(period, coinId),
+      {
+         refetchOnWindowFocus: false,
+      }
    )
 
    const coinDetail = coinDetailData?.data?.coin
@@ -125,6 +131,14 @@ function CoinDetail() {
       return <div className="min-h-[calc(100vh-140px-396px)]">Loading...</div>
    }
 
+   if (isFetched && !coinDetail) {
+      return (
+         <div className="min-h-[calc(100vh-140px-396px)]">
+            Không có dữ liệu về đồng coin này
+         </div>
+      )
+   }
+
    return (
       <div>
          <div className="text-[22px] my-[50px] ">
@@ -187,7 +201,7 @@ function CoinDetail() {
                <button
                   className={`${
                      item === period ? 'text-white' : 'text-gray-700'
-                  } text-xl`}
+                  } text-xl uppercase`}
                   key={index}
                   onClick={() => setPeriod(item)}
                >

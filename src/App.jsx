@@ -25,7 +25,9 @@ function Layout({ children }) {
    return (
       <>
          <Header />
-         <div className="w-pc mx-auto">{children}</div>
+         <div className="w-pc mx-auto min-h-[calc(100vh-140px-396px)">
+            {children}
+         </div>
          <Footer />
       </>
    )
@@ -62,7 +64,7 @@ function App() {
       let favoriteList = []
       onValue(usersRef, (snapshot) => {
          const data = snapshot.val()
-         dispatch(getFavorite(data))
+         dispatch(getFavorite(data || []))
       })
       console.log(favoriteList)
    }, [currentUser])
@@ -76,7 +78,7 @@ function App() {
          <Layout>
             <Routes>
                <Route path="/" element={<Homepage />} />
-               <Route path="/coin/*" element={<CoinDetails />} />
+               <Route path="/coin/:coinId" element={<CoinDetails />} />
                <Route
                   path="/favorite"
                   element={

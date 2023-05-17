@@ -41,7 +41,6 @@ function CoinItem({
 
    const handleLike = (e) => {
       e.preventDefault()
-      console.log(favoritList)
       dispatch(addFavorite(id))
       toast.success('Add to favorite success')
    }
