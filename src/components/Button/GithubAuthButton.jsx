@@ -32,7 +32,7 @@ function GithubAuthButton() {
       }
    }
 
-   return <button onClick={handleLoginGithub}>Continue with Github</button>
+   return <button onClick={handleLoginGithub}><img src='src\assets\img\Login_Register\Github.svg' alt='login_with_Github' /></button>
 }
 
 export default GithubAuthButton
