@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react'
 import Cookies from 'js-cookie'
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../../firebase'
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 function UserPopover({ currentUser }) {
    const dispatch = useDispatch()
    const navigate = useNavigate()
+   const avatarRef = React.useRef()
    const handleLogout = async () => {
       await auth.signOut()
       Cookies.remove('user')
@@ -22,7 +23,12 @@ function UserPopover({ currentUser }) {
       <Popover className={'relative'}>
          <Popover.Button title="Account">
             <img
+               ref={avatarRef}
                src={currentUser.photoURL}
+               onError={() =>
+                  (avatarRef.current.src =
+                     'https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-facebook-trang-xoa.jpg')
+               }
                alt="avatar"
                className="h-[60px] w-[60px] cursor-pointer rounded-full ml-2"
             />

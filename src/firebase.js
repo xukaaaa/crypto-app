@@ -14,7 +14,8 @@ const firebaseConfig = {
    storageBucket: 'crypto-app-34336.appspot.com',
    messagingSenderId: '861529641359',
    appId: '1:861529641359:web:3e7104be83e5c42d067bfa',
-   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+   databaseURL:
+      'https://crypto-app-34336-default-rtdb.asia-southeast1.firebasedatabase.app/',
 }
 
 // Initialize Firebase

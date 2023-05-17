@@ -17,12 +17,17 @@ import Cookies from 'js-cookie'
 import NotFound from './pages/NotFound'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { getDatabase, onValue, ref, set } from 'firebase/database'
+import { getAuth } from 'firebase/auth'
+import { getFavorite } from './redux/favoriteSlice'
 
 function Layout({ children }) {
    return (
       <>
          <Header />
-         <div className="w-pc mx-auto">{children}</div>
+         <div className="w-pc mx-auto min-h-[calc(100vh-140px-396px)">
+            {children}
+         </div>
          <Footer />
       </>
    )
@@ -52,6 +57,18 @@ function App() {
       return unsubcribe
    }, [])
 
+   useEffect(() => {
+      const db = getDatabase()
+      const usersRef = ref(db, 'users/' + currentUser?.uid + '/favoriteList')
+      console.log(`users/${currentUser?.uid}/favoriteList`)
+      let favoriteList = []
+      onValue(usersRef, (snapshot) => {
+         const data = snapshot.val()
+         dispatch(getFavorite(data || []))
+      })
+      console.log(favoriteList)
+   }, [currentUser])
+
    function AuthRequired({ children }) {
       return currentUser ? children : <Navigate to="/login" />
    }
@@ -61,7 +78,7 @@ function App() {
          <Layout>
             <Routes>
                <Route path="/" element={<Homepage />} />
-               <Route path="/coin/*" element={<CoinDetails />} />
+               <Route path="/coin/:coinId" element={<CoinDetails />} />
                <Route
                   path="/favorite"
                   element={
