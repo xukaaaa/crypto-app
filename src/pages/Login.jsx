@@ -45,8 +45,6 @@ function Login() {
                to={'/register'}
             >SIGN UP</Link>
          </div>
-               
-
       </>
    )
 }
