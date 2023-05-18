@@ -1,13 +1,9 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import {
-   defaultCoinIcon,
-   favoriteIcon,
-   favoriteIconActive,
-} from '../../assets/img/CoinItem'
-import { addFavorite, removeFavorite } from '../../redux/favoriteSlice'
+import { defaultCoinIcon } from '../../assets/img/CoinItem'
+import FavoriteButton from '../Button/FavoriteButton'
+import RemoveFavoriteButton from '../Button/RemoveFavoriteButton'
 
 function CoinItem({
    id,
@@ -26,7 +22,6 @@ function CoinItem({
       state.favorite.favoriteList?.some((item) => item === id)
    )
    const dispatch = useDispatch()
-   const favoritList = useSelector((state) => state.favorite.favoriteList)
 
    const coinIconRef = useRef()
    const formatPrice = (price) => {
@@ -37,18 +32,6 @@ function CoinItem({
 
    const formatCurrency = (currency) => {
       return Math.floor(currency).toLocaleString()
-   }
-
-   const handleLike = (e) => {
-      e.preventDefault()
-      dispatch(addFavorite(id))
-      toast.success('Add to favorite success')
-   }
-
-   const handleDislike = (e) => {
-      e.preventDefault()
-      dispatch(removeFavorite(id))
-      toast.success('Remove from favorite success')
    }
 
    return (
@@ -62,19 +45,9 @@ function CoinItem({
          >
             <div className="w-1/12 text-[22px] flex items-center pr-4 h-full">
                {isFavorited ? (
-                  <button
-                     className="h-full flex items-center"
-                     onClick={handleDislike}
-                  >
-                     <img className="w-6 h-6" src={favoriteIconActive} alt="" />
-                  </button>
+                  <RemoveFavoriteButton coinId={id} />
                ) : (
-                  <button
-                     className="h-full flex items-center"
-                     onClick={handleLike}
-                  >
-                     <img className="h-6 w-6" src={favoriteIcon} alt="" />
-                  </button>
+                  <FavoriteButton coinId={id} />
                )}
                {/* <img
                   src={favoriteImg}
