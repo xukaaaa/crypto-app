@@ -25,7 +25,9 @@ function Layout({ children }) {
    return (
       <>
          <Header />
-         <div className="w-pc mx-auto">{children}</div>
+         <div className="w-pc mx-auto min-h-[calc(100vh-140px-396px)">
+            {children}
+         </div>
          <Footer />
       </>
    )
@@ -57,15 +59,15 @@ function App() {
 
    useEffect(() => {
       const db = getDatabase()
-      const usersRef = ref(db, 'users/' + currentUser.uid + '/favoriteList')
-      console.log(`users/${currentUser.uid}/favoriteList`)
+      const usersRef = ref(db, 'users/' + currentUser?.uid + '/favoriteList')
+      console.log(`users/${currentUser?.uid}/favoriteList`)
       let favoriteList = []
       onValue(usersRef, (snapshot) => {
          const data = snapshot.val()
-         dispatch(getFavorite(data))
+         dispatch(getFavorite(data || []))
       })
       console.log(favoriteList)
-   }, [])
+   }, [currentUser])
 
    function AuthRequired({ children }) {
       return currentUser ? children : <Navigate to="/login" />
@@ -76,7 +78,7 @@ function App() {
          <Layout>
             <Routes>
                <Route path="/" element={<Homepage />} />
-               <Route path="/coin/*" element={<CoinDetails />} />
+               <Route path="/coin/:coinId" element={<CoinDetails />} />
                <Route
                   path="/favorite"
                   element={

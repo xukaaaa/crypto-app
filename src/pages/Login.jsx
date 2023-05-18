@@ -4,10 +4,10 @@ import GoogleAuthButton from '../components/Button/GoogleAuthButton'
 
 function Login() {
    return (
-      <>
+      <div className="min-h-[calc(100vh-140px-396px)]">
          <GoogleAuthButton />
          <GithubAuthButton />
-      </>
+      </div>
    )
 }
 
