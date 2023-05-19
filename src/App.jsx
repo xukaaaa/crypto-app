@@ -24,13 +24,13 @@ import { toast } from 'react-toastify'
 
 function Layout({ children }) {
    return (
-      <>
+      <div className="min-h-screen flex flex-col justify-between">
          <Header />
          <div className="w-pc mx-auto min-h-[calc(100vh-140px-396px)">
             {children}
          </div>
          <Footer />
-      </>
+      </div>
    )
 }
 
@@ -74,7 +74,7 @@ function App() {
       return currentUser ? children : <Navigate to="/login" />
    }
    function IsRegistered({ children }) {
-      return currentUser ? <Navigate to="/" /> : children;
+      return currentUser ? <Navigate to="/" /> : children
    }
    return (
       <QueryClientProvider client={queryClient}>
@@ -91,8 +91,22 @@ function App() {
                   }
                />
                <Route path="/search/:queryParam" element={<Search />} />
-               <Route path="/login" element={<IsRegistered><Login /></IsRegistered>} />
-               <Route path="/register" element={<IsRegistered><Register /></IsRegistered>} />
+               <Route
+                  path="/login"
+                  element={
+                     <IsRegistered>
+                        <Login />
+                     </IsRegistered>
+                  }
+               />
+               <Route
+                  path="/register"
+                  element={
+                     <IsRegistered>
+                        <Register />
+                     </IsRegistered>
+                  }
+               />
                <Route path="/*" element={<NotFound />} />
             </Routes>
             <ToastContainer
