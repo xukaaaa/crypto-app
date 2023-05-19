@@ -47,7 +47,7 @@ function Login() {
       <>
          <div className="relative left-[667px] mt-[245px] w-[104px] h-[48px] font-inter font-normal text-[40px] leading-[48px] text-white">Login</div>
          <div className=" relative left-[370px] top-[25px] mb-[168px] flex relative w-[700px] h-[704px] bg-[#1E1B3E] rounded-[20px]" >
-            <div className="absolute left-[90px] top-[82px] font-inter font-normal text-[20px] leading-[24px] text-white">Username</div>
+            <div className="absolute left-[90px] top-[82px] font-inter font-normal text-[20px] leading-[24px] text-white">Email</div>
             <form onSubmit={handleLogin}>
                <input
                   required={true}
