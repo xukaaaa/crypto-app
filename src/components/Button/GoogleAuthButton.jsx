@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '../../redux/authSlice'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
+// import { Google } from '../../assets/img/Login_Register'
 
 function GoogleAuthButton() {
    const dispatch = useDispatch()
@@ -32,7 +33,7 @@ function GoogleAuthButton() {
       }
    }
 
-   return <button onClick={handleLoginGoogle}>Continue with Google</button>
+   return <button onClick={handleLoginGoogle}><img src='src\assets\img\Login_Register\Google.svg' /></button>
 }
 
 export default GoogleAuthButton

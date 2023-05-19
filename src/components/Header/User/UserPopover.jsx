@@ -24,7 +24,7 @@ function UserPopover({ currentUser }) {
          <Popover.Button title="Account">
             <img
                ref={avatarRef}
-               src={currentUser.photoURL}
+               src={currentUser.photoURL || 'https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-facebook-trang-xoa.jpg'}
                onError={() =>
                   (avatarRef.current.src =
                      'https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-facebook-trang-xoa.jpg')

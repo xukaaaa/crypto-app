@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { getDatabase, onValue, ref, set } from 'firebase/database'
 import { getAuth } from 'firebase/auth'
 import { getFavorite } from './redux/favoriteSlice'
+import { toast } from 'react-toastify'
 
 function Layout({ children }) {
    return (
@@ -72,7 +73,9 @@ function App() {
    function AuthRequired({ children }) {
       return currentUser ? children : <Navigate to="/login" />
    }
-
+   function IsRegistered({ children }) {
+      return currentUser ? <Navigate to="/" /> : children;
+   }
    return (
       <QueryClientProvider client={queryClient}>
          <Layout>
@@ -88,8 +91,8 @@ function App() {
                   }
                />
                <Route path="/search/:queryParam" element={<Search />} />
-               <Route path="/login" element={<Login />} />
-               <Route path="/register" element={<Register />} />
+               <Route path="/login" element={<IsRegistered><Login /></IsRegistered>} />
+               <Route path="/register" element={<IsRegistered><Register /></IsRegistered>} />
                <Route path="/*" element={<NotFound />} />
             </Routes>
             <ToastContainer
