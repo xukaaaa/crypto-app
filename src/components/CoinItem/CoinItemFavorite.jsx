@@ -91,21 +91,21 @@ function CoinItemFavorite({ coinId }) {
                </p>
                <p
                   className={`w-1/3 flex justify-center ${
-                     coinDetail?.priceChange24h < 0
+                     coinDetail?.priceChange1d < 0
                         ? 'text-[#ff0000]'
                         : 'text-[#00ff29]'
                   }`}
                >
-                  {(coinDetail?.priceChange24h || 0) + '%'}
+                  {(coinDetail?.priceChange1d || 0) + '%'}
                </p>
                <p
                   className={`w-1/3 flex justify-center ${
-                     coinDetail?.priceChange7d < 0
+                     coinDetail?.priceChange1w < 0
                         ? 'text-[#ff0000]'
                         : 'text-[#00ff29]'
                   }`}
                >
-                  {(coinDetail?.priceChange7d || 0) + '%'}
+                  {(coinDetail?.priceChange1w || 0) + '%'}
                </p>
             </div>
 
