@@ -3,6 +3,8 @@ import { favoriteIconActive } from '../../assets/img/CoinItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFavorite } from '../../redux/favoriteSlice'
 import { toast } from 'react-toastify'
+import { getDatabase, ref, set } from 'firebase/database'
+import { auth } from '../../firebase'
 
 function RemoveFavoriteButton({ coinId }) {
    const favoriteList = useSelector((state) => state.favorite.favoriteList)
@@ -10,9 +12,17 @@ function RemoveFavoriteButton({ coinId }) {
    const dispatch = useDispatch()
    console.log('render lai button remove')
 
+   const writeDatabase = () => {
+      const db = getDatabase()
+      const userId = auth.currentUser.uid
+      const newFavoriteList = favoriteList.filter((item) => item !== coinId)
+      set(ref(db, `users/${userId}/favoriteList`), newFavoriteList)
+   }
+
    const handleRemoveFavoriteCoin = (e) => {
       e.preventDefault()
       dispatch(removeFavorite(coinId))
+      writeDatabase()
       toast.success('Remove from favorite success')
    }
 
