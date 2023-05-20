@@ -26,7 +26,6 @@ function Header() {
                <Link className="hover:text-hoverPrimary" to={'/favorite'}>
                   Favorite
                </Link>
-               <Link className="hover:text-hoverPrimary">Support</Link>
             </div>
 
             {currentUser ? (
