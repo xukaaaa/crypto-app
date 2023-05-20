@@ -14,6 +14,7 @@ import { Line } from 'react-chartjs-2'
 import { Link, useParams } from 'react-router-dom'
 import coinApi from '../api/coinApi'
 import { defaultCoinIcon } from '../assets/img/CoinItem'
+import { loadingIcon } from '../assets/img'
 
 ChartJS.register(
    CategoryScale,
@@ -128,7 +129,15 @@ function CoinDetail() {
    }
 
    if (coinDetailLoading || coinDetailFetching) {
-      return <div className="min-h-[calc(100vh-140px-396px)]">Loading...</div>
+      return (
+         <div className="min-h-[calc(100vh-140px-396px)] flex items-center justify-center">
+            <img
+               src={loadingIcon}
+               alt="loading"
+               className="animate-spin duration-300"
+            />
+         </div>
+      )
    }
 
    if (isFetched && !coinDetail) {
