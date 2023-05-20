@@ -40,12 +40,14 @@ function CoinDetail() {
       isFetched,
    } = useQuery(['coinDetail', coinId], () => coinApi.getCoinDetail(coinId), {
       refetchOnWindowFocus: false,
+      cacheTime: 0,
    })
 
    const { data: coinHistoryData } = useQuery(
       ['coinHistory', coinId, period],
       () => coinApi.getCoinHistory(period, coinId),
       {
+         cacheTime: 0,
          refetchOnWindowFocus: false,
       }
    )

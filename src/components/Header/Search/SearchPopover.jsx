@@ -33,12 +33,14 @@ function SearchPopover() {
             queryFn: async () => await coinApi.getTrendingCoins(),
             enabled: isPopoverShow,
             refetchOnWindowFocus: false,
+            cacheTime: 0,
          },
          {
             queryKey: ['search', coin.trim()],
             queryFn: async () => await coinApi.searchCoin(coin),
             enabled: !!coin,
             refetchOnWindowFocus: false,
+            cacheTime: 0,
          },
       ],
    })

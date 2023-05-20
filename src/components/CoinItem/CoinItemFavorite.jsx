@@ -16,6 +16,7 @@ function CoinItemFavorite({ coinId }) {
       ['coinDetail', coinId],
       () => coinApi.getCoinDetail(coinId),
       {
+         cacheTime: 0,
          refetchOnWindowFocus: false,
       }
    )

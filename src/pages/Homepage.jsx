@@ -26,7 +26,7 @@ function Homepage() {
             queryFn: () => coinApi.getMarket(page),
             config: {
                keepPreviousData: false,
-               cacheTime: 59 * 1000,
+               cacheTime: 0,
                refetchInterval: 1 * 60 * 1000,
             },
          },
@@ -37,6 +37,9 @@ function Homepage() {
          {
             queryKey: ['global'],
             queryFn: coinApi.getGlobal,
+            config: {
+               cacheTime: 0,
+            },
          },
       ],
    })
